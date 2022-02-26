@@ -94,6 +94,24 @@ export declare function putRefinedMetaData(metadata: EBML.EBMLElementDetail[], i
         CueTime: number;
     }[];
 }): ArrayBuffer;
+export declare function encodedSizeOfEbml(refinedMetaData: EBML.EBMLElementBuffer[]): number;
+export declare function refineMetadata(mesetadata: EBML.EBMLElementDetail[], sizeDiff: number, info: {
+    duration?: number;
+    clusterPtrs?: number[];
+    cues?: {
+        CueTrack: number;
+        CueClusterPosition: number;
+        CueTime: number;
+    }[];
+}): EBML.EBMLElementBuffer[];
+export declare function create_seekhead(metadata: (EBML.EBMLElementDetail | EBML.EBMLElementBuffer)[], sizeDiff: number): EBML.EBMLElementBuffer[];
+export declare function create_seek_from_clusters(clusterPtrs: number[], sizeDiff: number): EBML.EBMLElementBuffer[];
+export declare function create_cue(cueInfos: {
+    CueTrack: number;
+    CueClusterPosition: number;
+    CueTime: number;
+}[], sizeDiff: number): EBML.EBMLElementBuffer[];
+export declare function insertTag(_metadata: EBML.EBMLElementBuffer[], tagName: string, children: EBML.EBMLElementBuffer[], insertHead?: boolean): void;
 export declare function concat(list: Buffer[]): Buffer;
 export declare function encodeValueToBuffer(elm: EBML.MasterElement): EBML.MasterElement;
 export declare function encodeValueToBuffer(elm: EBML.ChildElementsValue): EBML.ChildElementBuffer;
