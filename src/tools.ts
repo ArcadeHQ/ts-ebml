@@ -7,6 +7,7 @@ import _Buffer = require("buffer/");
 import _tools = require("ebml/lib/ebml/tools");
 import _block = require("ebml-block");
 
+// @ts-ignore
 export const Buffer: typeof global.Buffer = _Buffer.Buffer;
 
 export const readVint: (buffer: Buffer, start: number)=> null | ({length: number; value: number; }) = _tools.readVint;

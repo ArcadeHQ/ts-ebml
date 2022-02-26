@@ -1,5 +1,6 @@
 /// <reference types="qunit"/>
-import EBML, {Decoder, Encoder, Reader} from "./";
+import * as EBML from "./";
+import {Decoder, Encoder, Reader} from "./";
 import {tools} from "./";
 
 const Buffer = tools.Buffer;
@@ -17,7 +18,7 @@ const WEBM_FILE_LIST = [
   "../matroska-test-files/test_files/test1.mkv",
   "../matroska-test-files/test_files/test2.mkv",
   "../matroska-test-files/test_files/test3.mkv",
-  // "../matroska-test-files/test_files/test4.mkv", this file is broken so not pass encoder_decoder_test 
+  // "../matroska-test-files/test_files/test4.mkv", this file is broken so not pass encoder_decoder_test
   "../matroska-test-files/test_files/test5.mkv",
   "../matroska-test-files/test_files/test6.mkv",
   // "../matroska-test-files/test_files/test7.mkv", this file has unknown tag so cannot write file
@@ -226,12 +227,12 @@ function create_convert_to_seekable_test(file: string){
         assert.ok(! Number.isFinite(raw_video.duration), "media recorder webm duration is not finite");
       }
       assert.ok(  Number.isFinite(refined_video.duration), "refined webm duration is finite");
-      
+
       await sleep(100);
       const wait = new Promise((resolve, reject)=>{raw_video.onseeked=resolve;raw_video.onerror=reject});
       raw_video.currentTime = 7*24*60*60;
       await wait;
-      
+
       // duration sec is different each browsers
       assert.ok(Math.abs(raw_video.duration - refined_video.duration) < 0.1);
     }catch(err){
@@ -241,7 +242,7 @@ function create_convert_to_seekable_test(file: string){
     if(reader.logging){
       // for debug
       console.info("put seekable ebml tree");
-      
+
       const refinedBuf = await readAsArrayBuffer(refinedWebM);
       const refinedElms = new Decoder().decode(refinedBuf);
       const _reader = new Reader();
@@ -260,7 +261,7 @@ function create_recorder_helper_test(file: string){
   return async (assert: Assert)=>{
     const decoder = new Decoder();
     const reader = new Reader();
-    
+
     let last_sec = 0;
     reader.addListener("duration", ({timecodeScale, duration})=>{
       const sec = duration * timecodeScale / 1000 / 1000 / 1000;
@@ -365,7 +366,7 @@ declare class MediaRecorder extends EventTarget {
   constructor(stream: MediaStream, opt: any);
   start(timeslice?: number): void;
   stop(): void;
-  mimeType: string; 
+  mimeType: string;
   state: "inactive"|"recording"|"paused";
   stream: MediaStream;
   videoBitsPerSecond: number;
