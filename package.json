@@ -46,7 +46,7 @@
     "ebml-block": "^1.1.0",
     "events": "^1.1.1",
     "int64-buffer": "^0.1.9",
-    "matroska": "https://github.com/ArcadeHQ/node-matroska.git#matroska-v4"
+    "matroska": "2.2.4"
   },
   "devDependencies": {
     "@types/commander": "^2.9.1",
